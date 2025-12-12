@@ -1,27 +1,27 @@
 /* @theme clean-blue-line */
 
+/* Google Fonts: Kosugi Maru */
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+
 :root {
   /* =========================================
      カラーパレット定義
      ========================================= */
-  /* テキストの基本色: 読みやすいダークグレー */
-  --color-text-main: #333333;
-  /* 背景色: 清潔感のある白 */
+  --color-text-main: #595959;
   --color-background: #ffffff;
-  /* テーマカラー: スライド右側の青い傍線や強調に使用 */
-  --color-theme-blue: #005bac;
-  /* サブアクセント: 補足情報や薄い文字用 */
+  --color-theme-blue: #2bace2;
   --color-text-sub: #666666;
-  /* コードブロックの背景: コンテンツと区別しやすい薄いグレー */
-  --color-code-bg: #f5f7f9;
+  --color-code-bg: #1e1e1e;
+  --color-code-text: #d4d4d4;
+  --color-border-light: #e5e5e5;
 
   /* =========================================
-     フォント設定
+     フォント設定（最小30px）
      ========================================= */
-  /* スライドの説明書きに適した、視認性の高いゴシック体（サンセリフ） */
-  --font-family-base: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-  /* コード用の等幅フォント */
-  --font-family-code: "Consolas", "Monaco", "Andale Mono", monospace;
+  --font-size-base: 30px;
+  --font-size-small: 20px;
+  --font-family-base: "Kosugi Maru", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  --font-family-code: "Fira Code", "Consolas", "Monaco", "Andale Mono", monospace;
 }
 
 /* =========================================
@@ -29,117 +29,196 @@
    ========================================= */
 section {
   font-family: var(--font-family-base);
-  font-size: 24px;
-  /* 情報量を多く載せられるよう少し小さめに設定 */
-  line-height: 1.6;
+  font-size: var(--font-size-base);
+  line-height: 1.7;
   color: var(--color-text-main);
   background-color: var(--color-background);
-
-  /* コンテンツの配置: 上下左右に余白を持たせる */
-  padding: 40px 60px;
-
-  /* フレックスボックスでレイアウト制御 */
+  padding: 60px 60px 100px 60px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* 上詰め配置 */
-
-  /* 【重要】スライド右側の青い傍線の設定 */
-  /* 右側にボーダーを設定することで「傍線」を表現 */
-  border-right: 12px solid var(--color-theme-blue);
-
-  /* ボックスサイズにボーダーを含める */
+  
+  /* 右側の青いライン */
+  border-right: 16px solid var(--color-theme-blue);
+  
+  /* 縦の最大幅を制御（はみ出し防止） */
+  height: 720px;
+  max-height: 720px;
+  overflow: hidden;
   box-sizing: border-box;
+}
+
+/* =========================================
+   watnowロゴ（右下に小さく配置）
+   - PDF/PPTX出力時は .footer-logo クラスを使用
+   ========================================= */
+
+/* フッターロゴ用クラス */
+.footer-logo {
+  position: absolute;
+  bottom: 15px;
+  right: 30px;
+  width: 80px;
+}
+
+.footer-logo img {
+  width: 100%;
+  height: auto;
 }
 
 /* =========================================
    見出しのスタイル
    ========================================= */
 h1 {
-  /* タイトル: 大きく、太く、テーマカラーで強調 */
   font-size: 1.8em;
   font-weight: bold;
   color: var(--color-text-main);
-  margin: 0 0 1rem 0;
-  /* 下に余白 */
+  margin: 0 0 0.8rem 0;
+  line-height: 1.3;
+}
 
-  /* タイトルの左側に小さな青いアクセント（オプション） */
-  /* border-left: 6px solid var(--color-theme-blue); */
-  /* padding-left: 15px; */
+/* h1 内の強調テキスト（青色） */
+h1 strong,
+h1 em {
+  color: var(--color-theme-blue);
+  font-style: normal;
 }
 
 h2 {
-  /* セクション見出し */
   font-size: 1.4em;
-  color: var(--color-theme-blue);
-  /* 青色にして階層を明確化 */
-  border-bottom: 2px solid #eeeeee;
-  /* 薄い下線で区切り */
-  padding-bottom: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  font-weight: bold;
+  color: var(--color-text-main);
+  margin-top: 1.2rem;
+  margin-bottom: 0.8rem;
 }
 
 h3 {
-  /* 小見出し */
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 0.6rem;
+  color: var(--color-text-main);
+}
+
+/* =========================================
+   テキスト強調
+   ========================================= */
+strong {
+  font-weight: 700;
+  color: var(--color-theme-blue);
+}
+
+em {
+  font-style: normal;
+  color: var(--color-theme-blue);
+}
+
+/* =========================================
+   リストのスタイル
+   ========================================= */
+ul, ol {
+  margin-left: 0.5em;
+  margin-bottom: 1rem;
+  padding-left: 1.5em;
+  font-size: var(--font-size-base);
+}
+
+li {
+  margin-bottom: 0.4rem;
+}
+
+/* ネストしたリスト（最小20px維持） */
+li > ul,
+li > ol {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+li > ul > li,
+li > ol > li {
+  font-size: var(--font-size-small);
   color: var(--color-text-sub);
 }
 
 /* =========================================
-   重要な単語・強調の扱い (Strong, Em)
-   ========================================= */
-strong {
-  /* 重要な単語は太字にし、テーマカラー(青)または赤み掛かった色で強調 */
-  font-weight: 900;
-  color: var(--color-theme-blue);
-  /* 蛍光ペン風の下線を入れる場合は以下を有効化 */
-  /* background: linear-gradient(transparent 60%, #aaccff 60%); */
-}
-
-/* =========================================
-   リストの配置
-   ========================================= */
-ul,
-ol {
-  margin-left: 20px;
-  margin-bottom: 1.5rem;
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
-/* =========================================
-   コードブロック
+   コードブロック（ダークテーマ）
    ========================================= */
 pre {
   background-color: var(--color-code-bg);
-  color: var(--color-text-main);
-  border-radius: 6px;
-  padding: 1.2rem;
+  color: var(--color-code-text);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-left: 4px solid var(--color-theme-blue);
-  /* コードブロックの左にも青線 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 code {
   font-family: var(--font-family-code);
+  font-size: var(--font-size-small);
 }
+
+/* インラインコード */
+:not(pre) > code {
+  background-color: #f0f4f8;
+  color: var(--color-theme-blue);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: var(--font-size-small);
+}
+
+/* シンタックスハイライト */
+pre .keyword { color: #569cd6; }
+pre .string { color: #ce9178; }
+pre .comment { color: #6a9955; }
+pre .function { color: #dcdcaa; }
+pre .number { color: #b5cea8; }
+pre .type { color: #4ec9b0; }
 
 /* =========================================
    引用 (Blockquote)
    ========================================= */
 blockquote {
-  background: #f9f9f9;
-  border-left: 8px solid #ccc;
-  /* 引用はグレーの線で控えめに */
-  margin: 1.5em 10px;
-  padding: 0.5em 20px;
+  background: #f8fafc;
+  border-left: 5px solid var(--color-theme-blue);
+  margin: 1.2em 0;
+  padding: 0.8em 1.2em;
   color: var(--color-text-sub);
   font-style: italic;
+  border-radius: 0 6px 6px 0;
+  font-size: var(--font-size-base);
+}
+
+blockquote strong {
+  color: var(--color-theme-blue);
+}
+
+/* =========================================
+   テーブル
+   ========================================= */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: var(--font-size-base);
+}
+
+th {
+  background-color: var(--color-theme-blue);
+  color: white;
+  font-weight: 600;
+  padding: 0.7em 1em;
+  text-align: left;
+}
+
+td {
+  padding: 0.6em 1em;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+tr:nth-child(even) {
+  background-color: #f8fafc;
 }
 
 /* =========================================
@@ -147,18 +226,15 @@ blockquote {
    ========================================= */
 section.lead {
   justify-content: center;
-  /* 中央揃え */
   align-items: center;
-  /* 垂直方向も中央 */
   text-align: center;
+  padding-top: 80px;
 }
 
 section.lead h1 {
-  font-size: 2.8em;
+  font-size: 2.4em;
   margin-bottom: 0.5em;
-  border: none;
-  color: var(--color-theme-blue);
-  /* 表紙タイトルは青 */
+  color: var(--color-text-main);
 }
 
 section.lead p {
@@ -166,22 +242,181 @@ section.lead p {
   color: var(--color-text-sub);
 }
 
-/* =========================================
-   フッター・ページ番号の配置
-   ========================================= */
-footer,
-section::after {
-  /* 情報の配置: 右下に固定 */
-  position: absolute;
-  bottom: 15px;
-  right: 30px;
-  /* 青い線の手前に配置 */
-  font-size: 14px;
-  color: #999;
+section.lead strong {
+  color: var(--color-theme-blue);
 }
 
-/* ページ番号を自動表示したい場合 */
-/* section::after {
-  content: attr(data-marpit-pagination);
+/* =========================================
+   セクション区切り (class: section)
+   ========================================= */
+section.section {
+  justify-content: center;
+  align-items: center;
+}
+
+section.section h1 {
+  font-size: 2.2em;
+  color: var(--color-text-main);
+  text-align: center;
+}
+
+section.section h1 strong {
+  color: var(--color-theme-blue);
+}
+
+section.section p {
+  color: var(--color-text-sub);
+  text-align: center;
+  font-size: var(--font-size-base);
+}
+
+/* =========================================
+   2カラムレイアウト
+   ========================================= */
+.columns {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.columns > div,
+.columns > section {
+  flex: 1;
+}
+
+.columns-center {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+.columns-center > div {
+  flex: 1;
+}
+
+/* 左側を狭く（画像用） */
+.columns-image-left {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.columns-image-left > div:first-child {
+  flex: 0 0 35%;
+}
+
+.columns-image-left > div:last-child {
+  flex: 1;
+}
+
+/* =========================================
+   画像スタイル
+   ========================================= */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 中央揃え画像 */
+p:has(img) {
+  text-align: center;
+}
+
+/* =========================================
+   リンク
+   ========================================= */
+a {
+  color: var(--color-theme-blue);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  font-size: var(--font-size-base);
+}
+
+a:hover {
+  border-bottom-color: var(--color-theme-blue);
+}
+
+/* =========================================
+   目次スライド用 (class: toc)
+   ========================================= */
+section.toc h1 {
+  font-size: 1.8em;
+  margin-bottom: 1.5rem;
+}
+
+section.toc .columns {
+  font-size: var(--font-size-base);
+}
+
+section.toc h3 {
+  color: var(--color-theme-blue);
+  font-size: 1.1em;
+  margin-bottom: 0.8rem;
+}
+
+section.toc ol {
+  margin-left: 0;
+  padding-left: 1.8em;
+}
+
+section.toc li {
+  margin-bottom: 0.35rem;
+  font-size: var(--font-size-base);
+}
+
+/* =========================================
+   注釈・補足テキスト（最小20px維持）
+   ========================================= */
+small,
+.note {
+  font-size: var(--font-size-small);
+  color: var(--color-text-sub);
+}
+
+/* =========================================
+   ハイライトボックス
+   ========================================= */
+.highlight-box {
+  background: linear-gradient(135deg, #e3f6fc 0%, #f0faff 100%);
+  border: 1px solid #b8e4f5;
+  border-left: 4px solid var(--color-theme-blue);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-size: var(--font-size-base);
+}
+
+.highlight-box strong {
+  color: var(--color-theme-blue);
+}
+
+/* =========================================
+   番号付き見出し用
+   ========================================= */
+.numbered {
+  counter-reset: item;
+}
+
+.numbered > li::marker {
   font-weight: bold;
-} */
+  color: var(--color-theme-blue);
+}
+
+/* =========================================
+   段落（最小20px維持）
+   ========================================= */
+p {
+  font-size: var(--font-size-base);
+  margin-bottom: 0.8rem;
+}
+
+/* =========================================
+   フッター・ヘッダー（最小20px維持）
+   ========================================= */
+header,
+footer {
+  font-size: var(--font-size-small);
+}
