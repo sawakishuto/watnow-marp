@@ -1,80 +1,187 @@
-/* @theme custom */
-
-@import 'default';
+/* @theme clean-blue-line */
 
 :root {
-  /* カラーパレット */
-  --color-primary: #2563eb;
-  --color-secondary: #7c3aed;
-  --color-accent: #f59e0b;
+  /* =========================================
+     カラーパレット定義
+     ========================================= */
+  /* テキストの基本色: 読みやすいダークグレー */
+  --color-text-main: #333333;
+  /* 背景色: 清潔感のある白 */
   --color-background: #ffffff;
-  --color-foreground: #1f2937;
-  
-  /* フォント設定 */
-  --font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  /* テーマカラー: スライド右側の青い傍線や強調に使用 */
+  --color-theme-blue: #005bac;
+  /* サブアクセント: 補足情報や薄い文字用 */
+  --color-text-sub: #666666;
+  /* コードブロックの背景: コンテンツと区別しやすい薄いグレー */
+  --color-code-bg: #f5f7f9;
+
+  /* =========================================
+     フォント設定
+     ========================================= */
+  /* スライドの説明書きに適した、視認性の高いゴシック体（サンセリフ） */
+  --font-family-base: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  /* コード用の等幅フォント */
+  --font-family-code: "Consolas", "Monaco", "Andale Mono", monospace;
 }
 
+/* =========================================
+   基本スライド設定 (section)
+   ========================================= */
 section {
-  font-family: var(--font-family);
+  font-family: var(--font-family-base);
+  font-size: 24px;
+  /* 情報量を多く載せられるよう少し小さめに設定 */
+  line-height: 1.6;
+  color: var(--color-text-main);
   background-color: var(--color-background);
-  color: var(--color-foreground);
+
+  /* コンテンツの配置: 上下左右に余白を持たせる */
+  padding: 40px 60px;
+
+  /* フレックスボックスでレイアウト制御 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* 上詰め配置 */
+
+  /* 【重要】スライド右側の青い傍線の設定 */
+  /* 右側にボーダーを設定することで「傍線」を表現 */
+  border-right: 12px solid var(--color-theme-blue);
+
+  /* ボックスサイズにボーダーを含める */
+  box-sizing: border-box;
 }
 
-/* ヘッダー・フッター */
-header, footer {
-  font-size: 0.6em;
-  color: #6b7280;
-}
-
-/* 見出しスタイル */
+/* =========================================
+   見出しのスタイル
+   ========================================= */
 h1 {
-  color: var(--color-primary);
-  border-bottom: 3px solid var(--color-accent);
-  padding-bottom: 0.3em;
+  /* タイトル: 大きく、太く、テーマカラーで強調 */
+  font-size: 1.8em;
+  font-weight: bold;
+  color: var(--color-text-main);
+  margin: 0 0 1rem 0;
+  /* 下に余白 */
+
+  /* タイトルの左側に小さな青いアクセント（オプション） */
+  /* border-left: 6px solid var(--color-theme-blue); */
+  /* padding-left: 15px; */
 }
 
 h2 {
-  color: var(--color-secondary);
+  /* セクション見出し */
+  font-size: 1.4em;
+  color: var(--color-theme-blue);
+  /* 青色にして階層を明確化 */
+  border-bottom: 2px solid #eeeeee;
+  /* 薄い下線で区切り */
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-/* コードブロック */
+h3 {
+  /* 小見出し */
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--color-text-sub);
+}
+
+/* =========================================
+   重要な単語・強調の扱い (Strong, Em)
+   ========================================= */
+strong {
+  /* 重要な単語は太字にし、テーマカラー(青)または赤み掛かった色で強調 */
+  font-weight: 900;
+  color: var(--color-theme-blue);
+  /* 蛍光ペン風の下線を入れる場合は以下を有効化 */
+  /* background: linear-gradient(transparent 60%, #aaccff 60%); */
+}
+
+/* =========================================
+   リストの配置
+   ========================================= */
+ul,
+ol {
+  margin-left: 20px;
+  margin-bottom: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* =========================================
+   コードブロック
+   ========================================= */
 pre {
-  background: #1e293b;
-  border-radius: 8px;
+  background-color: var(--color-code-bg);
+  color: var(--color-text-main);
+  border-radius: 6px;
+  padding: 1.2rem;
+  border-left: 4px solid var(--color-theme-blue);
+  /* コードブロックの左にも青線 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 code {
-  background: #f1f5f9;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
+  font-family: var(--font-family-code);
 }
 
-pre code {
-  background: transparent;
+/* =========================================
+   引用 (Blockquote)
+   ========================================= */
+blockquote {
+  background: #f9f9f9;
+  border-left: 8px solid #ccc;
+  /* 引用はグレーの線で控えめに */
+  margin: 1.5em 10px;
+  padding: 0.5em 20px;
+  color: var(--color-text-sub);
+  font-style: italic;
 }
 
-/* リンク */
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* リードスライド（タイトルスライド用） */
+/* =========================================
+   表紙スライド (class: lead)
+   ========================================= */
 section.lead {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+  /* 中央揃え */
+  align-items: center;
+  /* 垂直方向も中央 */
   text-align: center;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  color: white;
 }
 
 section.lead h1 {
-  color: white;
-  border-bottom: none;
+  font-size: 2.8em;
+  margin-bottom: 0.5em;
+  border: none;
+  color: var(--color-theme-blue);
+  /* 表紙タイトルは青 */
 }
 
+section.lead p {
+  font-size: 1.2em;
+  color: var(--color-text-sub);
+}
+
+/* =========================================
+   フッター・ページ番号の配置
+   ========================================= */
+footer,
+section::after {
+  /* 情報の配置: 右下に固定 */
+  position: absolute;
+  bottom: 15px;
+  right: 30px;
+  /* 青い線の手前に配置 */
+  font-size: 14px;
+  color: #999;
+}
+
+/* ページ番号を自動表示したい場合 */
+/* section::after {
+  content: attr(data-marpit-pagination);
+  font-weight: bold;
+} */
