@@ -1,0 +1,23 @@
+{
+  "name": "watnow-marp",
+  "version": "1.0.0",
+  "description": "Marp presentation project",
+  "scripts": {
+    "start": "marp -I slides/ --watch",
+    "build": "marp -I slides/ --output dist/",
+    "build:pdf": "marp -I slides/ --output dist/ --pdf",
+    "build:pptx": "marp -I slides/ --output dist/ --pptx",
+    "preview": "marp -I slides/ --preview"
+  },
+  "keywords": [
+    "marp",
+    "presentation",
+    "markdown"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.1.0"
+  }
+}
+
